@@ -1,102 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Posterior Leg Muscle Pain Map</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Posterior Hip + Leg Pain Map (Fitness)</title>
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-  }
-  svg {
-    width: 300px;
-    cursor: pointer;
-  }
-  .muscle {
-    fill: #d3d3d3;
-    stroke: #333;
-  }
-  .muscle:hover {
-    fill: #ff9999;
-  }
-  #info {
-    max-width: 400px;
-  }
+  body { font-family: -apple-system, Arial, sans-serif; margin: 0; padding: 16px; }
+  .wrap { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .panel { flex: 1 1 340px; min-width: 320px; }
+  .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; }
+  svg { width: 380px; max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #eee; touch-action: manipulation; }
+
+  /* Tap zones */
+  .zone { fill: transparent; stroke: transparent; cursor: pointer; }
+  .zone.selected { fill: rgba(255, 0, 0, 0.18); stroke: rgba(255, 0, 0, 0.35); stroke-width: 2; }
+
+  .hint { color: #666; font-size: 14px; margin-top: 8px; }
 </style>
 </head>
 <body>
 
-<svg viewBox="0 0 200 500">
-  <!-- Glutes -->
-  <rect class="muscle" x="60" y="50" width="80" height="60"
-        onclick="showInfo('glutes')" />
-  <!-- Hamstrings -->
-  <rect class="muscle" x="60" y="110" width="35" height="160"
-        onclick="showInfo('hamstrings')" />
-  <rect class="muscle" x="105" y="110" width="35" height="160"
-        onclick="showInfo('hamstrings')" />
-  <!-- Calves -->
-  <rect class="muscle" x="60" y="280" width="35" height="120"
-        onclick="showInfo('calves')" />
-  <rect class="muscle" x="105" y="280" width="35" height="120"
-        onclick="showInfo('calves')" />
-</svg>
+<div class="wrap">
+  <div class="panel card">
+    <div style="font-weight:600; margin-bottom:10px;">Tap where you feel pain (posterior view)</div>
 
-<div id="info">
-  <h2>Tap a muscle area</h2>
-  <p>Exercises will appear here.</p>
+    <!-- Matches posterior.png aspect ratio: 1024 x 1536 -->
+    <svg id="map" viewBox="0 0 1024 1536" role="img" aria-label="Posterior muscle map">
+      <image href="posterior.png" x="0" y="0" width="1024" height="1536" preserveAspectRatio="xMidYMid meet"></image>
+
+      <!-- Glute Max (Left / Right) -->
+      <path class="zone" data-area="glute_max"
+        d="M310,585 C330,520 410,495 470,520 C510,540 515,600 485,640
+           C450,690 360,695 330,650 C312,625 300,610 310,585 Z"></path>
+
+      <path class="zone" data-area="glute_max"
+        d="M555,520 C615,495 695,520 715,585 C725,610 713,625 695,650
+           C665,695 575,690 540,640 C510,600 515,540 555,520 Z"></path>
+
+      <!-- Glute Med / Upper outer hip (Left / Right) -->
+      <path class="zone" data-area="glute_med"
+        d="M280,510 C320,455 390,435 440,450 C465,458 470,490 450,515
+           C425,545 340,565 300,545 C275,532 265,530 280,510 Z"></path>
+
+      <path class="zone" data-area="glute_med"
+        d="M584,450 C634,435 704,455 744,510 C759,530 749,532 724,545
+           C684,565 599,545 574,515 C554,490 559,458 584,450 Z"></path>
+
+      <!-- Hamstrings (Left / Right) -->
+      <path class="zone" data-area="hamstrings"
+        d="M325,725 C350,690 430,695 465,740 C505,795 495,980 460,1105
+           C435,1195 360,1195 335,1105 C300,980 285,795 325,725 Z"></path>
+
+      <path class="zone" data-area="hamstrings"
+        d="M559,740 C594,695 674,690 699,725 C739,795 724,980 689,1105
+           C664,1195 589,1195 564,1105 C529,980 519,795 559,740 Z"></path>
+
+      <!-- Calves (Left / Right) -->
+      <path class="zone" data-area="calves"
+        d="M360,1125 C420,1100 470,1140 485,1220 C505,1330 490,1440 460,1490
+           C435,1535 375,1535 350,1490 C320,1440 305,1330 325,1220
+           C338,1155 350,1135 360,1125 Z"></path>
+
+      <path class="zone" data-area="calves"
+        d="M539,1220 C554,1140 604,1100 664,1125 C674,1135 686,1155 699,1220
+           C719,1330 704,1440 674,1490 C649,1535 589,1535 564,1490
+           C534,1440 519,1330 539,1220 Z"></path>
+    </svg>
+
+    <div class="hint">If the highlight is slightly off, tell me and I’ll tighten the tap zones to your exact image.</div>
+  </div>
+
+  <div class="panel card" id="info">
+    <div style="font-weight:700; font-size:18px;">Tap a region to get stretches + strengthening</div>
+    <p style="color:#555;">
+      General guidance only. If you have numbness/weakness, sudden swelling, severe night pain, fever,
+      or bowel/bladder changes, get medical care.
+    </p>
+  </div>
 </div>
 
 <script>
-function showInfo(area) {
-  const data = {
-    glutes: `
-      <h2>Glutes & Hip Stabilizers</h2>
-      <b>Common discomfort:</b> Low-back pain, hip tightness, sciatica-like symptoms
-      <h3>Stretch</h3>
+  const info = document.getElementById("info");
+  const zones = Array.from(document.querySelectorAll(".zone"));
+
+  const content = {
+    glute_max: `
+      <div style="font-weight:700; font-size:18px;">Glute Max (power + support)</div>
+      <p><b>Often helps with:</b> butt/hip ache, low-back load, running discomfort.</p>
+      <div><b>Stretch:</b></div>
       <ul>
-        <li>Figure-4 stretch</li>
-        <li>Seated piriformis stretch</li>
+        <li>Figure-4 stretch (30–60s x 2–3)</li>
+        <li>Knee-to-opposite-shoulder stretch (gentle)</li>
       </ul>
-      <h3>Strengthen</h3>
+      <div><b>Strengthen:</b></div>
       <ul>
-        <li>Glute bridges</li>
-        <li>Clamshells</li>
-        <li>Hip thrusts</li>
+        <li>Glute bridge (2–3 x 8–12)</li>
+        <li>Hip thrust (light → moderate)</li>
+        <li>Step-ups (slow + controlled)</li>
+      </ul>
+    `,
+    glute_med: `
+      <div style="font-weight:700; font-size:18px;">Glute Med (hip stability)</div>
+      <p><b>Often helps with:</b> outer-hip pain, knee tracking, IT-band irritation.</p>
+      <div><b>Stretch:</b></div>
+      <ul>
+        <li>Standing cross-over hip stretch (30–45s)</li>
+        <li>90/90 hip stretch (easy range)</li>
+      </ul>
+      <div><b>Strengthen:</b></div>
+      <ul>
+        <li>Side-lying clamshell (2–3 x 10–15)</li>
+        <li>Band lateral walks (small steps)</li>
+        <li>Single-leg balance (30–60s)</li>
       </ul>
     `,
     hamstrings: `
-      <h2>Hamstrings</h2>
-      <b>Common discomfort:</b> Posterior thigh tightness, knee strain, pelvic tilt
-      <h3>Stretch</h3>
+      <div style="font-weight:700; font-size:18px;">Hamstrings</div>
+      <p><b>Often helps with:</b> back-of-thigh tightness, sit-bone pulling, knee tension.</p>
+      <div><b>Stretch:</b></div>
       <ul>
-        <li>Supine hamstring stretch (strap or towel)</li>
-        <li>Jefferson curl (light)</li>
+        <li>Supine hamstring stretch with strap (30–60s x 2–3)</li>
+        <li>Hip-hinge “reach” (soft knees, neutral back)</li>
       </ul>
-      <h3>Strengthen</h3>
+      <div><b>Strengthen:</b></div>
       <ul>
-        <li>Romanian deadlifts</li>
-        <li>Nordic curls (assisted)</li>
+        <li>Romanian deadlift (light, slow) (2–3 x 6–10)</li>
+        <li>Hamstring sliders (towel on floor) (2–3 x 6–10)</li>
       </ul>
     `,
     calves: `
-      <h2>Calves (Gastrocnemius & Soleus)</h2>
-      <b>Common discomfort:</b> Achilles tightness, plantar strain
-      <h3>Stretch</h3>
+      <div style="font-weight:700; font-size:18px;">Calves (gastroc/soleus)</div>
+      <p><b>Often helps with:</b> Achilles tightness, foot strain, cramping.</p>
+      <div><b>Stretch:</b></div>
       <ul>
-        <li>Wall calf stretch (straight & bent knee)</li>
+        <li>Wall calf stretch — straight knee (30–60s)</li>
+        <li>Wall calf stretch — bent knee (30–60s)</li>
       </ul>
-      <h3>Strengthen</h3>
+      <div><b>Strengthen:</b></div>
       <ul>
-        <li>Seated calf raises</li>
-        <li>Single-leg calf raises</li>
+        <li>Seated calf raises (2–3 x 10–15)</li>
+        <li>Single-leg calf raises (slow) (2–3 x 6–12)</li>
       </ul>
     `
   };
-  document.getElementById("info").innerHTML = data[area];
-}
+
+  function selectArea(area, targetZone) {
+    zones.forEach(z => z.classList.remove("selected"));
+    targetZone.classList.add("selected");
+    info.innerHTML = content[area] || `<div style="font-weight:700;">No data for this region yet.</div>`;
+  }
+
+  zones.forEach(z => {
+    z.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      selectArea(z.dataset.area, z);
+    });
+  });
 </script>
 
 </body>
