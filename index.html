@@ -10,7 +10,10 @@
   .panel { flex: 1 1 340px; min-width: 320px; }
   .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; }
   svg { width: 380px; max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #eee; touch-action: manipulation; }
-
+svg, .zone {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
   /* Tap zones */
   .zone { fill: transparent; stroke: transparent; cursor: pointer; }
   .zone.selected { fill: rgba(255, 0, 0, 0.18); stroke: rgba(255, 0, 0, 0.35); stroke-width: 2; }
