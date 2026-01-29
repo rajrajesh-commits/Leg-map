@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Posterior Leg Muscle Pain Map</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  svg {
+    width: 300px;
+    cursor: pointer;
+  }
+  .muscle {
+    fill: #d3d3d3;
+    stroke: #333;
+  }
+  .muscle:hover {
+    fill: #ff9999;
+  }
+  #info {
+    max-width: 400px;
+  }
+</style>
+</head>
+<body>
+
+<svg viewBox="0 0 200 500">
+  <!-- Glutes -->
+  <rect class="muscle" x="60" y="50" width="80" height="60"
+        onclick="showInfo('glutes')" />
+  <!-- Hamstrings -->
+  <rect class="muscle" x="60" y="110" width="35" height="160"
+        onclick="showInfo('hamstrings')" />
+  <rect class="muscle" x="105" y="110" width="35" height="160"
+        onclick="showInfo('hamstrings')" />
+  <!-- Calves -->
+  <rect class="muscle" x="60" y="280" width="35" height="120"
+        onclick="showInfo('calves')" />
+  <rect class="muscle" x="105" y="280" width="35" height="120"
+        onclick="showInfo('calves')" />
+</svg>
+
+<div id="info">
+  <h2>Tap a muscle area</h2>
+  <p>Exercises will appear here.</p>
+</div>
+
+<script>
+function showInfo(area) {
+  const data = {
+    glutes: `
+      <h2>Glutes & Hip Stabilizers</h2>
+      <b>Common discomfort:</b> Low-back pain, hip tightness, sciatica-like symptoms
+      <h3>Stretch</h3>
+      <ul>
+        <li>Figure-4 stretch</li>
+        <li>Seated piriformis stretch</li>
+      </ul>
+      <h3>Strengthen</h3>
+      <ul>
+        <li>Glute bridges</li>
+        <li>Clamshells</li>
+        <li>Hip thrusts</li>
+      </ul>
+    `,
+    hamstrings: `
+      <h2>Hamstrings</h2>
+      <b>Common discomfort:</b> Posterior thigh tightness, knee strain, pelvic tilt
+      <h3>Stretch</h3>
+      <ul>
+        <li>Supine hamstring stretch (strap or towel)</li>
+        <li>Jefferson curl (light)</li>
+      </ul>
+      <h3>Strengthen</h3>
+      <ul>
+        <li>Romanian deadlifts</li>
+        <li>Nordic curls (assisted)</li>
+      </ul>
+    `,
+    calves: `
+      <h2>Calves (Gastrocnemius & Soleus)</h2>
+      <b>Common discomfort:</b> Achilles tightness, plantar strain
+      <h3>Stretch</h3>
+      <ul>
+        <li>Wall calf stretch (straight & bent knee)</li>
+      </ul>
+      <h3>Strengthen</h3>
+      <ul>
+        <li>Seated calf raises</li>
+        <li>Single-leg calf raises</li>
+      </ul>
+    `
+  };
+  document.getElementById("info").innerHTML = data[area];
+}
+</script>
+
+</body>
+</html>
