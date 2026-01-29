@@ -50,14 +50,37 @@ svg, .zone {
            C684,565 599,545 574,515 C554,490 559,458 584,450 Z"></path>
 
       <!-- Hamstrings (Left / Right) -->
-      <path class="zone" data-area="hamstrings"
-        d="M325,725 C350,690 430,695 465,740 C505,795 495,980 460,1105
-           C435,1195 360,1195 335,1105 C300,980 285,795 325,725 Z"></path>
+<!-- Hamstrings Left: Outer (biceps femoris-ish) -->
+<path class="zone" data-area="ham_outer_left"
+  d="M320,730
+     C345,690 400,690 430,730
+     C460,770 455,900 440,1010
+     C430,1100 385,1105 360,1015
+     C338,935 300,800 320,730 Z"></path>
 
-      <path class="zone" data-area="hamstrings"
-        d="M559,740 C594,695 674,690 699,725 C739,795 724,980 689,1105
-           C664,1195 589,1195 564,1105 C529,980 519,795 559,740 Z"></path>
+<!-- Hamstrings Left: Inner (semiT/semiM-ish) -->
+<path class="zone" data-area="ham_inner_left"
+  d="M430,730
+     C455,700 495,720 505,760
+     C520,820 515,935 500,1035
+     C485,1120 440,1120 420,1035
+     C405,950 400,800 430,730 Z"></path>
 
+<!-- Hamstrings Right: Inner -->
+<path class="zone" data-area="ham_inner_right"
+  d="M519,760
+     C529,720 569,700 594,730
+     C624,800 619,950 604,1035
+     C584,1120 539,1120 524,1035
+     C509,935 504,820 519,760 Z"></path>
+
+<!-- Hamstrings Right: Outer -->
+<path class="zone" data-area="ham_outer_right"
+  d="M594,730
+     C624,690 679,690 704,730
+     C724,800 686,935 664,1015
+     C639,1105 594,1100 584,1010
+     C569,900 564,770 594,730 Z"></path>
       <!-- Calves (Left / Right) -->
       <path class="zone" data-area="calf_gastroc_left"
   d="M350,1120
@@ -140,6 +163,38 @@ svg, .zone {
         <li>Single-leg balance (30–60s)</li>
       </ul>
     `,
+    ham_outer_left: `
+  <div style="font-weight:700; font-size:18px;">Left hamstring (outer)</div>
+  <p><b>Often helps with:</b> outer back-of-thigh tightness, lateral knee tension.</p>
+  <div><b>Stretch:</b></div>
+  <ul><li>Supine hamstring strap stretch (30–60s x 2–3)</li></ul>
+  <div><b>Strengthen:</b></div>
+  <ul><li>Romanian deadlift (light/slow) (2–3 x 6–10)</li><li>Slider curls (2–3 x 6–10)</li></ul>
+`,
+ham_inner_left: `
+  <div style="font-weight:700; font-size:18px;">Left hamstring (inner)</div>
+  <p><b>Often helps with:</b> inner back-of-thigh tightness, “sit-bone” pulling.</p>
+  <div><b>Stretch:</b></div>
+  <ul><li>Hamstring stretch + slight adduction (gentle) (30–60s)</li></ul>
+  <div><b>Strengthen:</b></div>
+  <ul><li>Hip hinge patterning</li><li>Bridge walkouts (slow)</li></ul>
+`,
+ham_inner_right: `
+  <div style="font-weight:700; font-size:18px;">Right hamstring (inner)</div>
+  <p><b>Often helps with:</b> inner back-of-thigh tightness, “sit-bone” pulling.</p>
+  <div><b>Stretch:</b></div>
+  <ul><li>Hamstring stretch + slight adduction (gentle) (30–60s)</li></ul>
+  <div><b>Strengthen:</b></div>
+  <ul><li>Hip hinge patterning</li><li>Bridge walkouts (slow)</li></ul>
+`,
+ham_outer_right: `
+  <div style="font-weight:700; font-size:18px;">Right hamstring (outer)</div>
+  <p><b>Often helps with:</b> outer back-of-thigh tightness, lateral knee tension.</p>
+  <div><b>Stretch:</b></div>
+  <ul><li>Supine hamstring strap stretch (30–60s x 2–3)</li></ul>
+  <div><b>Strengthen:</b></div>
+  <ul><li>Romanian deadlift (light/slow) (2–3 x 6–10)</li><li>Slider curls (2–3 x 6–10)</li></ul>
+`
     hamstrings: `
       <div style="font-weight:700; font-size:18px;">Hamstrings</div>
       <p><b>Often helps with:</b> back-of-thigh tightness, sit-bone pulling, knee tension.</p>
